@@ -1,0 +1,8 @@
+!.gitignore
+
+
+depot/*.pyc
+depot/*.swp
+depotapp/*.pyc
+depotapp/*.swp
+depotapp/templatetags/*.pyc
