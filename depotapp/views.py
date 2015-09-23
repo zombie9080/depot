@@ -8,6 +8,7 @@ from django.shortcuts import render_to_response
 from django.template.loader import get_template
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
+from datetime import datetime
 
 # app specific files
 
@@ -69,6 +70,37 @@ def edit_product(request, id):
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
+
+def store_view(request):
+	products = Product.objects.filter(date_available__gte=datetime.now().date()).order_by("-date_available")
+	t = get_template('depotapp/store.html')
+	c = RequestContext(request,locals())
+	return HttpResponse(t.render(c))
+
+def view_cart(request):
+	cart = request.session.get("cart",None)
+	t = get_template('depotapp/view_cart.html')
+	if not cart:
+		cart = Cart()
+		request.session["cart"] = cart
+	c = RequestContext(request,locals())
+	response = t.render(c)
+	return HttpResponse(response)
+
+def add_to_cart(request,id):
+	product = Product.objects.get(id=id)
+	cart = request.session.get('cart',None)
+	if not cart:
+		cart = Cart()
+		cart = Cart()
+		request.session['cart']=cart
+	cart.add_product(product)
+	request.session['cart']=cart
+	return view_cart(request)
+
+def clean_cart(request):
+	request.session['cart']=Cart()
+	return view_cart(request)
 
 def indexlog(request):
 	return render_to_response('indexlog.html')

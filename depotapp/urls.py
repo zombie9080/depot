@@ -13,4 +13,8 @@ urlpatterns =[
 ]
 urlpatterns += [
 	url(r'^indexlog/$',indexlog),
+	url(r'^store/$',store_view,name='store_view'),
+	url(r'^cart/view/$',view_cart,name='view_cart'),
+	url(r'^cart/view/(?P<id>\d+)$',add_to_cart,name='add_to_cart'),
+	url(r'^cart/clean/$',clean_cart,name='clean_cart'),
 ]

@@ -36,6 +36,28 @@
 {% if list_items.has_next %}
         <a href="?page={{ list_items.next_page_number }}">下一页</a>
 {% endif %}
+
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
 <p>
 <a href="{% url 'depotapp:create_product' %}">新增产品</a>
 </p>
