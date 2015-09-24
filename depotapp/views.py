@@ -72,7 +72,7 @@ def edit_product(request, id):
 
 
 def store_view(request):
-	products = Product.objects.filter(date_available__gte=datetime.now().date()).order_by("-date_available")
+	products = Product.objects.filter(date_available__lte=datetime.now().date()).order_by("-date_available")
 	t = get_template('depotapp/store.html')
 	c = RequestContext(request,locals())
 	return HttpResponse(t.render(c))
